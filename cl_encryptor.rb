@@ -1,7 +1,13 @@
 require './encryptor.rb'
 
-while true 
-  @e = Encryptor.new 
+@e = Encryptor.new
+PASSWORD = "z! xr+o'%v r%%"
+pw = false 
+
+puts "What's the password?"
+pw = true if @e.encrypt(gets.chomp, 13) == PASSWORD 
+
+while pw   
   puts "Enter 'e' to encrypt, 'd' to decrypt, or 'q' to quit:"
   choice = gets.chomp
 
