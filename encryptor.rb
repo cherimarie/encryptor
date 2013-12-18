@@ -1,11 +1,13 @@
 class Encryptor
-  def cipher(num)
-   characters = (" ".."z").to_a 
-   super_secret_code = characters.rotate(num)
-   Hash[characters.zip(super_secret_code)]
+
+  def supported_characters
+    (" ".."z").to_a 
   end
 
-
+  def cipher(num)
+   super_secret_code = supported_characters.rotate(num)
+   Hash[supported_characters.zip(super_secret_code)]
+  end
 
   def encrypt_letter(letter, rotation)
     cipher_for_rotation = cipher(rotation)
@@ -61,6 +63,14 @@ class Encryptor
     inpenetrated.write(ciphertext)
     #Close the file
     inpenetrated.close 
+  end 
+
+  def crack(message)
+    supported_characters.count.times.collect do |attempt|
+      cracky = decrypt(message, attempt)
+      puts cracky
+    end 
+    
   end 
 
 end
