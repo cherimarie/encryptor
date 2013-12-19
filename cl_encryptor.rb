@@ -1,11 +1,14 @@
 require './encryptor.rb'
-
+require 'digest/md5'
+ 
 @e = Encryptor.new
-PASSWORD = "z! xr+o'%v r%%"
+PASSWORD = "c4b4e9277626e187ae92a3d806faf229"
 pw = false 
 
 puts "What's the password?"
-pw = true if @e.encrypt(gets.chomp, 13) == PASSWORD 
+user_guess_enc = @e.encrypt(gets.chomp, 13)
+user_guess_hash = Digest::MD5.hexdigest(user_guess_enc)
+pw = true if user_guess_hash == PASSWORD 
 
 while pw   
   puts "Enter 'e' to encrypt, 'd' to decrypt, or 'q' to quit:"
